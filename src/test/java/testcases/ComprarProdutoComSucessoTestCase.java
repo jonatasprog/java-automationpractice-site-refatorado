@@ -23,6 +23,7 @@ import tasks.ProceedToCheckoutTask;
 import tasks.ShippingTask;
 import tasks.SignInTask;
 import tasks.SummaryTask;
+import verificationpoints.AddressVerificationPoint;
 import verificationpoints.OrderConfirmationVerificationPoint;
 import verificationpoints.PaymentVerificationPoint;
 import verificationpoints.SummaryVerificationPoint;
@@ -31,7 +32,7 @@ public class ComprarProdutoComSucessoTestCase {
 
 	private String FILE_PATH_CONTATOS = System.getProperty("user.dir") + File.separator + "datapools" + File.separator
 			+ "contatos.csv";
-	private CsvDatapool datapoolContatos;
+	public CsvDatapool datapoolContatos;
 	private EmailDataProvider emailDataProviderInstance;
 
 	private WebDriver driver;
@@ -43,7 +44,7 @@ public class ComprarProdutoComSucessoTestCase {
 	private SignInTask signInTaskInstance;
 	private InformationsTask informationsTaskInstance;
 	private AddressTask addressTaskInstance;
-	//private AddressVerificationPoint addressVerificationPointInstance;
+	private AddressVerificationPoint addressVerificationPointInstance;
 	private ShippingTask shippingTaskInstance;
 	private PaymentVerificationPoint paymentVerificationPointInstance;
 	private PaymentTask paymentTaskInstance;
@@ -71,7 +72,7 @@ public class ComprarProdutoComSucessoTestCase {
 		this.signInTaskInstance = new SignInTask(driver);
 		this.informationsTaskInstance = new InformationsTask(driver);
 		this.addressTaskInstance = new AddressTask(driver);
-		//this.addressVerificationPointInstance = new AddressVerificationPoint(driver);
+		this.addressVerificationPointInstance = new AddressVerificationPoint(driver);
 		this.shippingTaskInstance = new ShippingTask(driver);
 		this.paymentVerificationPointInstance = new PaymentVerificationPoint(driver);
 		this.paymentTaskInstance = new PaymentTask(driver);
@@ -103,8 +104,8 @@ public class ComprarProdutoComSucessoTestCase {
 					this.datapoolContatos.getValue("country"), this.datapoolContatos.getValue("mobile"),
 					this.datapoolContatos.getValue("alias"));
 
+			this.addressVerificationPointInstance.validarEnderecoCompleto();
 			this.addressTaskInstance.clicarBotaoProceedToCheckout();
-			//this.addressVerificationPointInstance.validarEnderecoCompleto();
 			this.shippingTaskInstance.aceitarTermsOfService();
 			this.paymentVerificationPointInstance.validarValorTotalDaCompra();
 			this.paymentTaskInstance.clicarLinkPaymentMethod();

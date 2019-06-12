@@ -11,17 +11,16 @@ public class InformationsTask {
 		this.informationsPageObjectInstance = new InformationsPageObject(driver);
 	}
 
-	public void preencherFormularioERegistrar(String firstName, 
-											  String lastName, 
-											  String password, 
-											  String address, 
-											  String city,
-											  String state,
-											  String zipCode,
-											  String country,
-											  String mobile,
-											  String alias) 
-	{
+	public void preencherEndereco(String address, String city, String state, String zipCode, String country) {
+		this.informationsPageObjectInstance.addressTextfield().sendKeys(address);
+		this.informationsPageObjectInstance.cityTextfield().sendKeys(city);
+		this.informationsPageObjectInstance.stateCombobox().selectByVisibleText(state);
+		this.informationsPageObjectInstance.zipCodeTextfield().sendKeys(zipCode);
+		this.informationsPageObjectInstance.countryCombobox().selectByVisibleText(country);
+	}
+
+	public void preencherFormularioERegistrar(String firstName, String lastName, String password, String address,
+			String city, String state, String zipCode, String country, String mobile, String alias) {
 		this.informationsPageObjectInstance.firstNameTextfield().sendKeys(firstName);
 		this.informationsPageObjectInstance.lastNameTextfield().sendKeys(lastName);
 		this.informationsPageObjectInstance.passwordTextfield().sendKeys(password);
@@ -35,5 +34,5 @@ public class InformationsTask {
 		this.informationsPageObjectInstance.aliasTextfield().sendKeys(alias);
 		this.informationsPageObjectInstance.registerButton().click();
 	}
-	
+
 }
