@@ -11,18 +11,9 @@ public class AddressTask {
 		this.addressPageObjectInstance = new AddressPageObject(driver);
 	}
 	
-	public void capturarEndereco (String endereco,
-										  String cidade,
-										  String estado,
-										  String zipCode,
-										  String pais) 
+	public void capturarEndereco (String endereco) 
 	{
-		this.addressPageObjectInstance.enderecoTextfield().getText();
-		this.addressPageObjectInstance.cidadeEstadoZipCodeTextfield().getText();
-		this.addressPageObjectInstance.cidadeEstadoZipCodeTextfield().getText();
-		this.addressPageObjectInstance.cidadeEstadoZipCodeTextfield().getText();
-		this.addressPageObjectInstance.paisTextfield().getText();
-		
+		this.addressPageObjectInstance.enderecoTextfield().getText();		
 	}
 
 	public void clicarBotaoProceedToCheckout() {

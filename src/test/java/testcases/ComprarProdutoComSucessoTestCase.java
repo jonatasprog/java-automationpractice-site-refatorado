@@ -6,8 +6,11 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import com.mongodb.client.model.geojson.Position;
 
 import framework.datapools.CsvDatapool;
 import framework.dataprovider.EmailDataProvider;
@@ -91,20 +94,18 @@ public class ComprarProdutoComSucessoTestCase {
 		while (this.datapoolContatos.hasNext()) {
 			this.homeTaskInstance.selecionarProduto();
 			this.addToCartTaskInstance.adicionarProdutoNoCarrinho();
-			this.proceedToCheckoutTaskInstance.clicarBotaoProceedToCheckout();
+			this.proceedToCheckoutTaskInstance.clicarBotaoProceedToCheckout();	
 			this.summaryVerificationPointInstance.validarPresencaDoProdutoNoCarrinho();
 			this.summaryTaskInstance.clicarBotaoProceedToCheckout();
-			
 			this.signInTaskInstance.criarConta(this.emailDataProviderInstance.gerarEmail());
-
-			this.informationsTaskInstance.preencherFormularioERegistrar(this.datapoolContatos.getValue("firstName"),
+			this.informationsTaskInstance.preencherFormularioERegistrar(
+					this.datapoolContatos.getValue("firstName"),
 					this.datapoolContatos.getValue("lastName"), this.datapoolContatos.getValue("password"),
 					this.datapoolContatos.getValue("address"), this.datapoolContatos.getValue("city"),
 					this.datapoolContatos.getValue("state"), this.datapoolContatos.getValue("zipCode"),
 					this.datapoolContatos.getValue("country"), this.datapoolContatos.getValue("mobile"),
 					this.datapoolContatos.getValue("alias"));
-
-			this.addressVerificationPointInstance.validarEnderecoCompleto();
+			this.addressVerificationPointInstance.validarEndereco();
 			this.addressTaskInstance.clicarBotaoProceedToCheckout();
 			this.shippingTaskInstance.aceitarTermsOfService();
 			this.paymentVerificationPointInstance.validarValorTotalDaCompra();
@@ -118,7 +119,7 @@ public class ComprarProdutoComSucessoTestCase {
 	@After
 	public void tearDown() {
 		if (this.driver != null) {
-			//this.driver.quit();
+			this.driver.quit();
 		}
 
 		Report.close();

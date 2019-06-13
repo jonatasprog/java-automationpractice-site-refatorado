@@ -34,4 +34,9 @@ public class AddressPageObject {
 		return proceedToCheckoutButton;
 	}
 
+	public WebElement enderecoEntrega() {
+		return this.driver.findElement(By.id("address_delivery"));
+		
+	}
+	
 }
