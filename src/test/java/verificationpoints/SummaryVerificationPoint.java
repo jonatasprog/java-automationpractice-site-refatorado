@@ -6,7 +6,7 @@ import com.aventstack.extentreports.Status;
 
 import framework.tools.Report;
 import framework.tools.ScreenShot;
-import framework.utils.Position;
+import framework.utils.PositionUtils;
 import tasks.HomeTask;
 import tasks.SummaryTask;
 
@@ -15,13 +15,13 @@ public class SummaryVerificationPoint {
 	private SummaryTask summaryTaskInstance;
 	private HomeTask homeTaskInstance;
 	private WebDriver driver;
-	private Position position;
+	private PositionUtils position;
 
 	public SummaryVerificationPoint(WebDriver driver) {
 		this.summaryTaskInstance = new SummaryTask(driver);
 		this.homeTaskInstance = new HomeTask(driver);
 		this.driver = driver;
-		this.position = new Position();
+		this.position = new PositionUtils();
 	}
 
 	public void validarPresencaDoProdutoNoCarrinho() {

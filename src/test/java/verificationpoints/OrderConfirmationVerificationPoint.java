@@ -7,19 +7,19 @@ import com.aventstack.extentreports.Status;
 
 import framework.tools.Report;
 import framework.tools.ScreenShot;
-import framework.utils.Position;
+import framework.utils.PositionUtils;
 import tasks.OrderConfirmationTask;
 
 public class OrderConfirmationVerificationPoint {
 
 	private OrderConfirmationTask orderConfirmationTaskInstance;
 	private WebDriver driver;
-	private Position position;
+	private PositionUtils position;
 	
 	public OrderConfirmationVerificationPoint(WebDriver driver) {
 		this.orderConfirmationTaskInstance = new OrderConfirmationTask(driver);
 		this.driver = driver;
-		this.position = new Position();
+		this.position = new PositionUtils();
 	}
 
 	public void validarPresencaDaMensagemOrderComplete() {
@@ -28,7 +28,7 @@ public class OrderConfirmationVerificationPoint {
 				.equalsIgnoreCase(this.orderConfirmationTaskInstance.capturarMensagem())) {
 			Report.log(Status.PASS, "Compra realizada com sucesso", ScreenShot.capture(this.driver));
 		} else {
-			Report.log(Status.FAIL, "Compra não realizada", ScreenShot.capture(this.driver));
+			Report.log(Status.FAIL, "Compra nao realizada", ScreenShot.capture(this.driver));
 		}
 	}
 
